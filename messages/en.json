@@ -1,0 +1,30 @@
+{
+  "titles": {
+    "error": "Error",
+    "sign-up": "Sign up",
+    "tasks": "Tasks"
+  },
+  "errors": {
+    "invalid-email": "Invalid email address",
+    "invalid-login-credentials": "Invalid login credentials",
+    "invalid-password-min": "Password must have at least {min} characters",
+    "invalid-password-max": "Password must have at most {max} characters",
+    "invalid-title-min": "Title must have at least {min} characters",
+    "invalid-title-max": "Title must have at most {max} characters"
+  },
+  "login": {
+    "sign-in": "Sign in",
+    "sign-up": "Sign up",
+    "create-account": "Create account",
+    "back": "Go back",
+    "password": "Password"
+  },
+  "header": {
+    "signed": "Signed in as",
+    "settings": "Settings",
+    "logout": "Log out"
+  },
+  "dashboard": {
+    "new-task": "New task..."
+  }
+}

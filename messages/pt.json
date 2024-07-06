@@ -1,0 +1,30 @@
+{
+  "titles": {
+    "error": "Erro",
+    "sign-up": "Cadastro",
+    "tasks": "Tarefas"
+  },
+  "errors": {
+    "invalid-email": "Endereço de email inválido",
+    "invalid-login-credentials": "Credenciais de login inválidas",
+    "invalid-password-min": "A senha deve ter pelo menos {min} caracteres",
+    "invalid-password-max": "A senha deve ter no máximo {max} caracteres",
+    "invalid-title-min": "O título deve ter pelo menos {min} caracteres",
+    "invalid-title-max": "O título deve ter no máximo {max} caracteres"
+  },
+  "login": {
+    "sign-in": "Login",
+    "sign-up": "Cadastrar-se",
+    "create-account": "Criar conta",
+    "back": "Voltar",
+    "password": "Senha"
+  },
+  "header": {
+    "signed": "Autenticado como",
+    "settings": "Configurações",
+    "logout": "Sair"
+  },
+  "dashboard": {
+    "new-task": "Nova tarefa..."
+  }
+}
