@@ -365,7 +365,7 @@ model Task {
   id        String   @id @default(cuid())
   title     String
   isDone    Boolean  @default(false)
-  order     Int      @default(autoincrement())
+  index     Int      @default(0)
   //
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())

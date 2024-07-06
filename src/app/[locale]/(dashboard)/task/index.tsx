@@ -8,12 +8,17 @@ import { getTranslationKey } from "@/utils/functions"
 import { useTranslations } from "next-intl"
 import { Button } from "@nextui-org/button"
 import { Loader2, Trash2 } from "lucide-react"
+import { useDraggable } from '@dnd-kit/core';
+import { useSortable } from "@dnd-kit/sortable"
+import { CSS } from '@dnd-kit/utilities';
 
 type Props = {
-  task: TaskModel
+  task: TaskModel;
+  id: string;
+  activeIndex: number;
 }
 
-export const Task = ({ task }: Props) => {
+export const Task = ({ task, id, activeIndex }: Props) => {
   const t = useTranslations();
   const queryClient = useQueryClient();
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
@@ -37,8 +42,8 @@ export const Task = ({ task }: Props) => {
   });
 
   const updateMutation = useMutation({
-    mutationFn: async ({ id, isDone, order }: { id: string, isDone: boolean, order: number }) => {
-      await updateTask({ id, isDone, order })
+    mutationFn: async ({ id, isDone }: { id: string, isDone: boolean }) => {
+      await updateTask({ id, isDone })
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
@@ -51,14 +56,37 @@ export const Task = ({ task }: Props) => {
     },
   });
 
+  const {
+    listeners,
+    attributes,
+    setNodeRef,
+    transition,
+    transform,
+    active,
+    isSorting,
+    index,
+    over
+  } = useSortable({
+    id
+  });
+
+  const isActive = active?.id === id;
+  const insertPosition =
+    over?.id === id ? (index > activeIndex ? 1 : -1) : undefined;
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
   return (
-    <div key={task.id} className="flex flex-row justify-between items-center w-full p-4 my-2 bg-white rounded-xl shadow-md">
+    <div className="flex flex-row justify-between items-center w-full p-4 my-2 bg-white rounded-xl shadow-md" ref={setNodeRef} style={style} {...attributes} {...listeners}>
       <div className="flex flex-row gap-4">
         <Checkbox
-          isSelected={task.isDone}
-          onChange={(e) => updateMutation.mutate({ id: task.id, isDone: e.target.checked, order: task.order })}
+          isSelected={task?.isDone}
+          onChange={(e) => updateMutation.mutate({ id: task.id, isDone: e.target.checked })}
         />
-        <p>{task.title}</p>
+        <p>{task?.title}</p>
       </div>
       <Button isIconOnly onClick={() => deleteMutation.mutate({ id: task.id })}>
         {isDeleteLoading ? <Loader2 className="animate-spin" /> : <Trash2 />}

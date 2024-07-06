@@ -23,7 +23,7 @@ export const getTasks = async ({ userId }: { userId: string }): Promise<Task[]> 
         userId
       },
       orderBy: [
-        { order: "desc" },
+        { index: "asc" },
         { createdAt: "desc" }
       ]
     })
@@ -66,18 +66,38 @@ export const deleteTask = async ({ id }: { id: string }): Promise<Task | null> =
   }
 }
 
-export const updateTask = async ({ id, isDone, order }: { id: string, isDone: boolean, order: number }): Promise<Task | null> => {
+export const updateTask = async ({ id, isDone }: { id: string, isDone: boolean }): Promise<Task | null> => {
   try {
     const task = await prisma.task.update({
       where: {
         id
       },
       data: {
-        isDone,
-        order
+        isDone
       }
     })
     return task
+  }
+  catch (error) {
+    console.error(error)
+    return null
+  }
+}
+
+export const updateTaskOrder = async ({ tasks }: { tasks: { id: string, index: number }[] }): Promise<Task[] | null> => {
+  try {
+    const updatedTasks = await Promise.all(tasks.map(async (task) => {
+      const updatedTask = await prisma.task.update({
+        where: {
+          id: task.id
+        },
+        data: {
+          index: task.index
+        }
+      })
+      return updatedTask
+    }))
+    return updatedTasks
   }
   catch (error) {
     console.error(error)
