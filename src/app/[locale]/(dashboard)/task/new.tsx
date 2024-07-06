@@ -9,13 +9,13 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { User } from "@supabase/supabase-js";
 import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { createTask } from "../actions";
 
 import { TaskSchema } from "@/schemas/task";
 import { useToast } from "@/components/ui/use-toast";
 import { getTranslationKey } from "@/utils/functions";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 type Props = {
   user: User;
@@ -28,11 +28,7 @@ export const NewTask = ({ user }: Props) => {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
-  const {
-    register,
-    handleSubmit,
-    reset
-  } = useForm<z.infer<typeof schema>>({
+  const { register, handleSubmit, reset } = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
       title: "",
@@ -42,7 +38,7 @@ export const NewTask = ({ user }: Props) => {
   const mutation = useMutation({
     mutationFn: async ({ title }: { title: string }) => {
       setLoading(true);
-      await createTask({ title: title, userId: user.id })
+      await createTask({ title: title, userId: user.id });
       setLoading(false);
     },
     onSuccess: () => {

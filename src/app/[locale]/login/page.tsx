@@ -29,7 +29,6 @@ export default function Login() {
     register,
     handleSubmit,
     formState: { errors },
-    control,
   } = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {

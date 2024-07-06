@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import { redirect } from "next/navigation";
-import { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 
 import { createClient } from "@/utils/supabase/server";

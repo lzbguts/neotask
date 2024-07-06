@@ -10,6 +10,7 @@ import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import AccountDropdown from "@/components/AccountDropdown";
 import { createClient } from "@/utils/supabase/server";
+import { ReactNode } from "react";
 
 export const metadata: Metadata = {
   title: {
@@ -33,7 +34,7 @@ export default async function RootLayout({
   children,
   params: { locale },
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   params: { locale: string };
 }) {
   const messages = await getMessages();

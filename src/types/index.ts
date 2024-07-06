@@ -4,7 +4,7 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
-export type TranslationType = (arg: string, { }?: any) => string;
+export type TranslationType = (key: string, args?: any) => string;
 
 export type Icon = {
   id: string;

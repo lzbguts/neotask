@@ -29,7 +29,6 @@ export default function SignUp() {
     register,
     handleSubmit,
     formState: { errors },
-    control,
   } = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
