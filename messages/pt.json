@@ -10,10 +10,11 @@
     "invalid-password-min": "A senha deve ter pelo menos {min} caracteres",
     "invalid-password-max": "A senha deve ter no máximo {max} caracteres",
     "invalid-title-min": "O título deve ter pelo menos {min} caracteres",
-    "invalid-title-max": "O título deve ter no máximo {max} caracteres"
+    "invalid-title-max": "O título deve ter no máximo {max} caracteres",
+    "user-already-registered": "Usuário já cadastrado"
   },
   "login": {
-    "sign-in": "Login",
+    "sign-in": "Entrar",
     "sign-up": "Cadastrar-se",
     "create-account": "Criar conta",
     "back": "Voltar",

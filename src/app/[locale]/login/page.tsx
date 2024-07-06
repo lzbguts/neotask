@@ -57,8 +57,9 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 items-center justify-center">
       <Image alt="NeoTask" height={200} src="/logo.png" width={200} />
+      <p className="font-bold">Login</p>
       <form
         className="flex flex-col justify-center items-center gap-4"
         onSubmit={handleSubmit(onSubmit)}
@@ -78,7 +79,7 @@ export default function Login() {
           type="password"
         />
         <Button className="w-full" type="submit">
-          {loading ? <Loader2 className="animate-spin" /> : "Login"}
+          {loading ? <Loader2 className="animate-spin" /> : t("login.sign-in")}
         </Button>
         <a href={`/${locale}/login/sign-up`}>{t("login.sign-up")}</a>
       </form>

@@ -14,11 +14,11 @@ import Image from "next/image";
 import { getTranslationKey } from "@/utils/functions";
 import { createClient } from "@/utils/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
-import { LoginSchema } from "@/schemas/login";
+import { SignupSchema } from "@/schemas/login";
 
 export default function SignUp() {
   const t = useTranslations();
-  const schema = LoginSchema(t);
+  const schema = SignupSchema(t);
   const supabase = createClient();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -57,8 +57,9 @@ export default function SignUp() {
   };
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 items-center justify-center">
       <Image alt="NeoTask" height={200} src="/logo.png" width={200} />
+      <p className="font-bold">{t("titles.sign-up")}</p>
       <form
         className="flex flex-col justify-center items-center gap-4"
         onSubmit={handleSubmit(onSubmit)}
@@ -78,7 +79,7 @@ export default function SignUp() {
           type="password"
         />
         <Button className="w-full" type="submit">
-          {loading ? <Spinner color="danger" /> : t("login.sign-up")}
+          {loading ? <Spinner color="danger" /> : t("login.create-account")}
         </Button>
         <a href={`/${locale}/login/`}>{t("login.back")}</a>
       </form>
