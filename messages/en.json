@@ -27,5 +27,14 @@
   },
   "dashboard": {
     "new-task": "New task..."
+  },
+  "settings": {
+    "close": "Close",
+    "select-language": "Select language",
+    "select-theme": "Select theme",
+    "english": "English",
+    "portuguese": "Portuguese",
+    "light": "Light",
+    "dark": "Dark"
   }
 }

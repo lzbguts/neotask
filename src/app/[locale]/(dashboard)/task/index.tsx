@@ -74,7 +74,7 @@ export const Task = ({ task, id }: Props) => {
   return (
     <div
       ref={setNodeRef}
-      className="flex flex-row justify-between items-center w-full p-4 my-2 bg-white rounded-xl shadow-md"
+      className="flex flex-row justify-between items-center w-full p-4 my-2 bg-box-secondary rounded-xl shadow-md"
       style={style}
       {...attributes}
       {...listeners}

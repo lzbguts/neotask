@@ -12,7 +12,7 @@ export default async function Home() {
   } = (await supabase.auth.getUser()) as { data: { user: User } };
 
   return (
-    <div className="flex flex-col bg-box w-6/12 h-[80vh] rounded-3xl">
+    <div className="flex flex-col bg-box w-full sm:w-6/12 h-[80vh] rounded-3xl">
       <NewTask user={user} />
       <TasksContainer user={user} />
     </div>

@@ -11,6 +11,7 @@ import { fontSans } from "@/config/fonts";
 import AccountDropdown from "@/components/AccountDropdown";
 import { createClient } from "@/utils/supabase/server";
 import { ReactNode } from "react";
+import { SettingsButton } from "@/components/SettingsButton";
 
 export const metadata: Metadata = {
   title: {
@@ -59,11 +60,13 @@ export default async function RootLayout({
           themeProps={{ attribute: "class", defaultTheme: "light" }}
           timezone={timezone}
         >
-          {user && (
-            <header className="absolute top-0 left-0 right-0 bg-background text-foreground text-center p-4 flex flex-row justify-end gap-4">
+          <header className="absolute top-0 left-0 right-0 bg-background text-foreground text-center p-4 flex flex-row justify-end gap-4">
+            {user ? (
               <AccountDropdown user={user} />
-            </header>
-          )}
+            ) : (
+              <SettingsButton />
+            )}
+          </header>
           <main className="text-foreground bg-background min-h-screen flex flex-col justify-center items-center">
             {children}
           </main>

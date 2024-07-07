@@ -27,5 +27,14 @@
   },
   "dashboard": {
     "new-task": "Nova tarefa..."
+  },
+  "settings": {
+    "close": "Fechar",
+    "select-language": "Selecionar idioma",
+    "select-theme": "Selecionar tema",
+    "english": "Inglês",
+    "portuguese": "Português",
+    "light": "Claro",
+    "dark": "Escuro"
   }
 }
