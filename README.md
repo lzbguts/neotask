@@ -1,19 +1,15 @@
-
 # NeoTask
 
 A simple to-do list project using modern technologies and optimized queries
 
-
-
-
 ### Install dependencies
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `bun`:
 
 ```bash
-npm install
+bun install
 ```
-    
+
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
@@ -31,7 +27,7 @@ To run this project, you will need to add the following environment variables to
 ### Run the development server
 
 ```bash
-npm run dev
+bun dev
 ```
 
 ### Setup pnpm (optional)
@@ -43,6 +39,7 @@ public-hoist-pattern[]=*@nextui-org/*
 ```
 
 After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
+
 ## License
 
 Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
