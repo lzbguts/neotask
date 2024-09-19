@@ -7,7 +7,6 @@ import { Loader2, Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { User } from "@supabase/supabase-js";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -16,9 +15,10 @@ import { createTask } from "../actions";
 import { TaskSchema } from "@/schemas/task";
 import { useToast } from "@/components/ui/use-toast";
 import { getTranslationKey } from "@/utils/functions";
+import { User } from "next-auth";
 
 type Props = {
-  user: User;
+  user: User | undefined;
 };
 
 export const NewTask = ({ user }: Props) => {
@@ -38,7 +38,7 @@ export const NewTask = ({ user }: Props) => {
   const mutation = useMutation({
     mutationFn: async ({ title }: { title: string }) => {
       setLoading(true);
-      await createTask({ title: title, userId: user.id });
+      await createTask({ title: title, userId: user?.id || "" });
       setLoading(false);
     },
     onSuccess: () => {

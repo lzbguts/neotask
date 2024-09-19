@@ -18,7 +18,8 @@
     "sign-up": "Sign up",
     "create-account": "Create account",
     "back": "Go back",
-    "password": "Password"
+    "password": "Password",
+    "with": "Sign in with {provider}"
   },
   "header": {
     "signed": "Signed in as",

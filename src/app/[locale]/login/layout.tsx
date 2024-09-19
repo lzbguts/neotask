@@ -2,8 +2,7 @@ import { ReactNode } from "react";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
 import { getLocale } from "next-intl/server";
-
-import { createClient } from "@/utils/supabase/server";
+import { auth } from "@/auth";
 
 interface PrivateLayoutProps {
   children: ReactNode;
@@ -14,10 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default async function PrivateLayout({ children }: PrivateLayoutProps) {
-  const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const session = await auth()
+  const user = session?.user
   const locale = await getLocale();
 
   if (user) {

@@ -1,7 +1,6 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { User } from "@supabase/supabase-js";
 import { Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import {
@@ -23,16 +22,17 @@ import {
 import { getTasks, updateTaskOrder } from "../actions";
 
 import { Task } from ".";
+import { User } from "next-auth";
 
 type Props = {
-  user: User;
+  user: User | undefined;
 };
 
 export const TasksContainer = ({ user }: Props) => {
   const t = useTranslations();
   const tasks = useQuery({
     queryKey: ["tasks"],
-    queryFn: () => getTasks({ userId: user.id }),
+    queryFn: () => getTasks({ userId: user?.id || "" }),
   });
   const [items, setItems] = useState<string[]>([]);
 

@@ -18,7 +18,8 @@
     "sign-up": "Cadastrar-se",
     "create-account": "Criar conta",
     "back": "Voltar",
-    "password": "Senha"
+    "password": "Senha",
+    "with": "Entrar com {provider}"
   },
   "header": {
     "signed": "Autenticado como",

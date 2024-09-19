@@ -1,40 +1,27 @@
-import { type NextRequest } from "next/server";
-import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import createMiddleware from "next-intl/middleware";
+import { NextRequest, NextResponse } from "next/server";
 
-const handleI18nRouting = createMiddleware({
+const internationalizationMiddleware = createMiddleware({
   locales: ["en", "pt"],
   defaultLocale: "en",
 });
 
 export async function middleware(request: NextRequest) {
-  const response = handleI18nRouting(request);
+  let response = NextResponse.next();
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        get(name: string) {
-          return request.cookies.get(name)?.value;
-        },
-        set(name: string, value: string, options: CookieOptions) {
-          request.cookies.set({ name, value, ...options });
-          response.cookies.set({ name, value, ...options });
-        },
-        remove(name: string, options: CookieOptions) {
-          request.cookies.set({ name, value: "", ...options });
-          response.cookies.set({ name, value: "", ...options });
-        },
-      },
-    },
-  );
-
-  await supabase.auth.getUser();
-
+  // Exclude specific paths from further processing
+  if (
+    !request.nextUrl.pathname.startsWith("/login") &&
+    !request.nextUrl.pathname.startsWith("/api") &&
+    !request.nextUrl.pathname.startsWith("/_next") &&
+    !request.nextUrl.pathname.includes(".")
+  ) {
+    return internationalizationMiddleware(request);
+  }
+  // Return the response object directly
   return response;
 }
 
 export const config = {
-  matcher: ["/", "/(pt|en)/:path*"],
+  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
 };

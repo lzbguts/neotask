@@ -9,9 +9,9 @@ import { Social } from "./social";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import AccountDropdown from "@/components/AccountDropdown";
-import { createClient } from "@/utils/supabase/server";
 import { ReactNode } from "react";
 import { SettingsButton } from "@/components/SettingsButton";
+import { auth } from "@/auth";
 
 export const metadata: Metadata = {
   title: {
@@ -40,10 +40,8 @@ export default async function RootLayout({
 }) {
   const messages = await getMessages();
   const timezone = await getTimeZone();
-  const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const session = await auth()
+  const user = session?.user
 
   return (
     <html suppressHydrationWarning lang={locale}>

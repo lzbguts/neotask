@@ -8,12 +8,12 @@ import {
 } from "@nextui-org/dropdown";
 import { Avatar } from "@nextui-org/avatar";
 import { useLocale, useTranslations } from "next-intl";
-import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import { useDisclosure } from "@nextui-org/modal";
-
-import { createClient } from "@/utils/supabase/client";
 import { SettingsModal } from "./SettingsModal";
+import { User } from "next-auth";
+import { signOut } from "@/auth";
+import { logout } from "@/utils/login";
 
 type Props = {
   user: User | null;
@@ -23,13 +23,7 @@ export default function AccountDropdown({ user }: Props) {
   const t = useTranslations();
   const router = useRouter();
   const locale = useLocale();
-  const supabase = createClient();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
-  const signOut = async () => {
-    await supabase.auth.signOut();
-    router.refresh();
-  };
 
   return (
     <>
@@ -48,7 +42,7 @@ export default function AccountDropdown({ user }: Props) {
           >
             {t("header.settings")}
           </DropdownItem>
-          <DropdownItem key="logout" color="danger" onClick={signOut}>
+          <DropdownItem key="logout" color="danger" onClick={() => logout()}>
             {t("header.logout")}
           </DropdownItem>
         </DropdownMenu>
